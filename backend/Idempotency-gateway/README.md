@@ -17,11 +17,12 @@ A production-grade idempotency layer that guarantees every payment is processed 
 3. [Project Flow Chart](#project-flow-chart)
 4. [Sequence Diagrams](#sequence-diagrams)
 5. [Setup Instructions](#setup-instructions)
-6. [API Reference](#api-reference)
-7. [Design Decisions](#design-decisions)
-8. [Developer's Choice — Key Expiry (TTL)](#developers-choice--key-expiry-ttl)
-9. [Running Tests](#running-tests)
-10. [Project Structure](#project-structure)
+6. [Interactive API Documentation](#interactive-api-documentation)
+7. [API Reference](#api-reference)
+8. [Design Decisions](#design-decisions)
+9. [Developer's Choice — Key Expiry (TTL)](#developers-choice--key-expiry-ttl)
+10. [Running Tests](#running-tests)
+11. [Project Structure](#project-structure)
 
 ---
 
@@ -132,17 +133,28 @@ IN_FLIGHT_TIMEOUT_MS=10000
 ### Step 3 — Build and run
 
 ```bash
-# Compile TypeScript to JavaScript
-npm run build
-
-# Start in production (requires build step above)
-npm start
-
-# Start in development (ts-node, no compile step needed)
+# Start in development (ts-node)
 npm run dev
+
+# OR build and start in production
+npm run build && npm start
 ```
 
 Server is ready at `http://localhost:3000`.
+
+Swagger UI is available at `http://localhost:3000/api-docs`.
+
+---
+
+## Interactive API Documentation
+
+Once the server is running, visit **[http://localhost:3000/api-docs](http://localhost:3000/api-docs)** to access the interactive Swagger UI.
+
+You can:
+- Explore all endpoints with full request/response schemas
+- Try out API calls directly from the browser
+- See example payloads for success and error cases
+- Test idempotency behavior by sending duplicate requests
 
 ---
 
@@ -296,7 +308,8 @@ idempotency-gateway/
 │   │   └── index.ts                 # Shared TypeScript interfaces
 │   ├── config/
 │   │   ├── database.ts              # MongoDB connection (Mongoose)
-│   │   └── redis.ts                 # Redis connection (ioredis)
+│   │   ├── redis.ts                 # Redis connection (ioredis)
+│   │   └── swagger.ts               # Swagger/OpenAPI specification
 │   ├── middleware/
 │   │   └── idempotency.ts           # Core idempotency logic — Redis + MongoDB
 │   ├── models/
@@ -308,6 +321,10 @@ idempotency-gateway/
 │
 ├── tests/
 │   └── payment.test.ts              # Jest + Supertest integration tests
+│
+├── assets/
+│   ├── AmaliTech_Challenge_flowChat.png   # Flowchart diagram
+│   └── Amalitech_squence_diagram.png      # Sequence diagrams
 │
 ├── .env.example                     # Environment variable template
 ├── .gitignore

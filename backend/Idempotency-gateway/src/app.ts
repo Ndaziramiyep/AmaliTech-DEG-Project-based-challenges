@@ -1,14 +1,18 @@
 import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
+import swaggerUi from 'swagger-ui-express';
 import { connectDB } from './config/database';
 import redis from './config/redis';
+import swaggerSpec from './config/swagger';
 import paymentRoutes from './routes/payment';
 
 const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get('/health', (_req: Request, res: Response) => res.json({ status: 'ok' }));
 
