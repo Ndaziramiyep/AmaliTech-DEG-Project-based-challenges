@@ -7,6 +7,8 @@ A production-grade idempotency layer that guarantees every payment is processed 
 ![Express](https://img.shields.io/badge/Express-4.x-000000?style=flat-square&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-≥6-47A248?style=flat-square&logo=mongodb&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-≥6-DC382D?style=flat-square&logo=redis&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-UI-85EA2D?style=flat-square&logo=swagger&logoColor=black)
+![Jest](https://img.shields.io/badge/Jest-tested-C21325?style=flat-square&logo=jest&logoColor=white)
 
 ---
 
@@ -54,8 +56,8 @@ The gateway uses a **two-tier caching strategy** to balance speed and durability
 ┌──────────────────────────────────────────────────────────────────┐
 │                   IDEMPOTENCY MIDDLEWARE                         │
 │                                                                  │
-│   L1 ──► Redis       Sub-ms cache hit + distributed lock        │
-│   L2 ──► MongoDB     Persistent store + atomic upsert fallback  │
+│   L1 ──► Redis       Sub-ms cache hit + poll-based in-flight deduplication  │
+│   L2 ──► MongoDB     Persistent store + atomic upsert fallback               │
 └──────────────────────┬───────────────────────────────────────────┘
                        │  (new request only)
                        ▼
