@@ -110,7 +110,7 @@ npm install
 ### Step 2 — Configure environment
 
 ```bash
-mkdir .env
+cp .env.example .env
 ```
 
 Edit `.env` with your values:
