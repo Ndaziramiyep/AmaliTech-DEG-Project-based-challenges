@@ -101,7 +101,7 @@ The gateway uses a **two-tier caching strategy** to balance speed and durability
 ### Step 1 — Clone and install
 
 ```bash
-git clone https://github.com/Ndaziramiyep/AmaliTech-DEG-Project-based-challenges
+git clone https://github.com/Ndaziramiyep/AmaliTech-DEG-Project-based-challenges.git
 cd backend
 cd idempotency-gateway
 npm install
